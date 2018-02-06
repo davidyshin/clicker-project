@@ -138,7 +138,7 @@ module.exports = {
   registerUser: registerUser,
   updateSingleUser: updateSingleUser,
   loginUser: loginUser,
-  logoutuser: logoutUser,
+  logoutUser: logoutUser,
   getUserClicks: getUserClicks,
   updateUserClicks: updateUserClicks
 };

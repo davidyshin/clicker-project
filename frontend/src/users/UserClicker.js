@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import { Route, Link, Switch } from "react-router-dom";
+
 
 class UserClicker extends React.Component {
   constructor(props) {
@@ -12,7 +14,7 @@ class UserClicker extends React.Component {
 
   componentDidMount() {
     axios
-      .get(`/users/clicks`, {username: this.props.username})
+      .get(`/users/clicks`, { username: this.props.username })
       .then(res => {
         console.log("got clicks:", res);
         this.setState({
@@ -43,6 +45,7 @@ class UserClicker extends React.Component {
     const { clicks } = this.state;
     return (
       <div>
+        <Link to="/users/logout">Log Out</Link>
         <h1> Click Counter: {clicks} </h1>
         <button type="button" onClick={this.handleClick}>
           {" "}
