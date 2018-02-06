@@ -11,7 +11,7 @@ class UserClicker extends React.Component {
       clicks: 0
     };
   }
-
+//hiiiii
   componentDidMount() {
     axios
       .get(`/users/clicks`, { username: this.props.username })
