@@ -1,6 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { Redirect } from "react-router";
+import { Route, Link, Switch } from "react-router-dom";
+
+import NewUser from "./NewUser";
 
 class LoginUser extends React.Component {
   state = {
@@ -56,11 +59,12 @@ class LoginUser extends React.Component {
     const { usernameInput, passwordInput, message, loggedIn } = this.state;
 
     if (loggedIn) {
-      return <Redirect to="/users" />;
+      return <Redirect to="/users/clicks" />;
     }
 
     return (
       <div>
+        <Link to="/users/new">Sign Up</Link>
         <h1> Log In </h1>
 
         <form onSubmit={this.submitForm}>
@@ -77,8 +81,8 @@ class LoginUser extends React.Component {
           <label>
             Password:
             <input
-              type="text"
-              name="username"
+              type="password"
+              name="password"
               value={passwordInput}
               onChange={this.handlePasswordChange}
             />

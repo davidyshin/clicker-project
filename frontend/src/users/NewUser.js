@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom'
 
 class NewUser extends Component {
   constructor() {
@@ -7,6 +8,7 @@ class NewUser extends Component {
     this.state = {
       username: "",
       password: "",
+      userAvailable: "",
       message: ""
     };
   }
@@ -22,28 +24,47 @@ class NewUser extends Component {
   handleFormSubmit = e => {
     e.preventDefault();
     const { username, password } = this.state;
-
-    axios
-      .post("/users/new", {
-        username: username,
-        password: password
-      })
-      .then(res => {
-        console.log(res);
-        this.setState({
-          username: "",
-          password: "",
-          message: "Registered user"
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        this.setState({
-          username: "",
-          password: "",
-          message: "Error registering user"
-        });
+    if (username && password) {
+      if (password.length < 5){
+        return this.setState({
+          message: "Password must be at least 5 characters"
+        })
+      }
+      axios.get("/users/new").then(response => {
+        console.log("RESPONSE FOR GET REQUEST", response.data.data);
+        if (!response.data.data.find(n => n.username === username)) {
+          axios
+            .post("/users/new", {
+              username: username,
+              password: password
+            })
+            .then(res => {
+              console.log(res);
+              this.setState({
+                username: "",
+                password: "",
+                message: "Registered user"
+              });
+            })
+            .catch(err => {
+              console.log(err);
+              this.setState({
+                username: "",
+                password: "",
+                message: "Error registering user"
+              });
+            });
+        } else {
+          this.setState({
+            message: "Username already exists"
+          });
+        }
       });
+    } else {
+      this.setState({
+        message: "Please fill out both forms"
+      })
+    }
   };
 
   render() {
@@ -52,6 +73,7 @@ class NewUser extends Component {
 
     return (
       <div>
+      <Link to ="/users/login">Login</Link>
         <h1>Register</h1>
         <form onSubmit={this.handleFormSubmit}>
           <input
