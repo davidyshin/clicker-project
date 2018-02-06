@@ -3,10 +3,10 @@ var express = require("express");
 var router = express.Router();
 const { loginRequired } = require("../auth/helpers");
 
-router.get("/", loginRequired, db.getSingleUser);
+router.get("/", loginRequired, db.getSingleUser );
 router.post("/new", db.registerUser);
-router.get("/hobbies", loginRequired, db.getUserHobbies);
-router.patch("/hobbies", loginRequired, db.updateUserHobbies);
+router.get("/clicks", loginRequired, db.getUserClicks);
+router.patch("/clicks", loginRequired, db.updateUserClicks);
 router.post("/login", db.loginUser);
 router.get("/logout", loginRequired, db.logoutuser);
 

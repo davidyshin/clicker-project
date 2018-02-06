@@ -1,16 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import Clicker from './Clicker'
-import './App.css';
+import React from "react";
+import { Route, Link, Switch } from "react-router-dom";
+import "./App.css";
+import Users from "./users/Users";
 
-class App extends Component {
+class App extends React.Component {
+  homepage = () => {
+    return <h1> Homepage </h1>;
+  };
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to Clicker</h1>
-        </header>
-        <Clicker />
+        <nav>
+          <Link to="/users/new">Register</Link> {" . "}
+          <Link to="/users/login">Log In</Link>
+          {" . "}
+          <Link to="/users/clicks">CLICKER</Link>
+        </nav>
+
+        <Route exact path="/" render={this.homepage} />
+        <Route path="/users" component={Users} />
       </div>
     );
   }

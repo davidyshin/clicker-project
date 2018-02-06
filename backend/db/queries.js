@@ -17,10 +17,10 @@ function getAllUsers(req, res, next) {
     });
 }
 
-function updateClicks(req, res, next) {
+function updateUserClicks(req, res, next) {
   db
     .none(
-      "update users set clicks = ${clicks} where username = ${username}",
+      "update users set clicks = ${clicks} where id = ${id}",
       {
         clicks: req.body.clicks,
         username: req.user.username
@@ -40,7 +40,7 @@ function updateClicks(req, res, next) {
 function getUserClicks(req, res, next) {
   console.log("get clicks");
   db
-    .one("select clicks from users where username = ${username}", req.user)
+    .one("select clicks from users where id = ${id}", req.id)
     .then(function(data) {
       console.log("got clicks: ", data);
       res.status(200).json({
@@ -87,6 +87,7 @@ function updateSingleUser(req, res, next) {
 }
 
 function loginUser(req, res, next) {
+  
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       res.status(500).send("error while trying to log in");
