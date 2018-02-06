@@ -11,13 +11,12 @@ class UserClicker extends React.Component {
   }
 
   componentDidMount() {
-    console.log("user clicks mounted");
     axios
-      .get(`/users/clicks`, {id: this.props.id})
+      .get(`/users/clicks`, {username: this.props.username})
       .then(res => {
         console.log("got clicks:", res);
         this.setState({
-          clicks: res.data.clicks
+          clicks: res.data.clicks || 0
         });
       })
       .catch(err => {
@@ -26,15 +25,15 @@ class UserClicker extends React.Component {
   }
 
   handleClick = e => {
-    let { clicks } = this.state || 0;
+    let { clicks } = this.state;
     clicks += 1;
     this.setState({
       clicks
     });
     axios
       .patch(`/users/clicks`, {
-        id: this.props.id,
-        clicks: this.state.clicks
+        username: this.props.username,
+        clicks: clicks
       })
       .catch(err => {
         console.log(err);
@@ -42,7 +41,6 @@ class UserClicker extends React.Component {
   };
   render() {
     const { clicks } = this.state;
-    console.log("user clicks, ", this.state);
     return (
       <div>
         <h1> Click Counter: {clicks} </h1>

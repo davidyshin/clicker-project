@@ -30,7 +30,7 @@ class Users extends React.Component {
     if (!user) {
       return <div> must log in first </div>;
     }
-    return <UserClicker id={user.id} />;
+    return <UserClicker id={user.username} />;
   };
 
   render() {

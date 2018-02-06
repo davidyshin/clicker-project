@@ -20,7 +20,7 @@ function getAllUsers(req, res, next) {
 function updateUserClicks(req, res, next) {
   db
     .none(
-      "update users set clicks = ${clicks} where id = ${id}",
+      "update users set clicks = ${clicks} where username = ${username}",
       {
         clicks: req.body.clicks,
         username: req.user.username
@@ -40,7 +40,7 @@ function updateUserClicks(req, res, next) {
 function getUserClicks(req, res, next) {
   console.log("get clicks");
   db
-    .one("select clicks from users where id = ${id}", req.id)
+    .one("select clicks from users where username = ${username}", req.user)
     .then(function(data) {
       console.log("got clicks: ", data);
       res.status(200).json({
