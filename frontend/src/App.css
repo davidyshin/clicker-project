@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  user-select: none;
 }
 
 .App-logo {
@@ -25,4 +26,20 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.gameContainer {
+  background: url('https://ak7.picdn.net/shutterstock/videos/17852947/thumb/1.jpg?i10c=img.resize(height:160)');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 4fr;
+  grid-template-areas: 
+  '. gameHeader .'
+  '. . .';
+}
+
+.gameHeader {
+  grid-area: gameHeader;
 }

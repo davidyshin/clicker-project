@@ -59,12 +59,12 @@ class LoginUser extends React.Component {
     const { usernameInput, passwordInput, message, loggedIn } = this.state;
 
     if (loggedIn) {
-      return <Redirect to="/users/clicks" />;
+      return <Redirect to="/users/AntTakeover" />;
     }
 
     return (
       <div>
-        <Link to="/users/new">Sign Up</Link>
+        <Link to="/users/new">New User</Link>
         <h1> Log In </h1>
 
         <form onSubmit={this.submitForm}>

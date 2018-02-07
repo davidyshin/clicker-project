@@ -1,59 +1,65 @@
-import React from "react";
-import { Route, Link, Switch } from "react-router-dom";
-import axios from "axios";
-
-import NewUser from "./users/NewUser";
-import LoginUser from "./users/LoginUser";
-import UserClicker from "./users/UserClicker";
+import React from "react"
+import { Route, Link, Switch } from "react-router-dom"
+import axios from "axios"
+import './App.css'
+import NewUser from "./users/NewUser"
+import LoginUser from "./users/LoginUser"
+import AntTakeover from "./game/AntTakeover"
 import LogOut from "./users/LogOut"
 
 class App extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
-      user: null
-    };
+      user: null,
+      newUser: true,
+    }
   }
 
   componentDidMount() {
     // try to get user
   }
+
   setUser = user => {
-    this.setState({ user: user });
-  };
+    this.setState({ user: user })
+  }
+
   logOutUser = () => {
-    this.setState({ user: null });
-  };
+    this.setState({ user: null })
+  }
 
   renderLogin = () => {
-    return <LoginUser setUser={this.setUser} />;
-  };
+    return <LoginUser setUser={this.setUser} />
+  }
 
   renderUserClicker = props => {
-    const { user } = this.state;
+    const { user } = this.state
     if (!user) {
-      return <LoginUser setUser={this.setUser} />;
+      return <LoginUser setUser={this.setUser} />
     }
-    return <UserClicker id={user.username} />;
-  };
+    return <AntTakeover id={user.username} />
+  }
 
   renderLogOut = () => {
-    return <LogOut logOutUser={this.logOutUser} />;
-  };
+    return <LogOut logOutUser={this.logOutUser} />
+  }
 
   render() {
+    const { user, newUser } = this.state
     return (
       <div className="App">
-        <h1> CLICKER GAME </h1>
+        <div>
+          <h1>Ant Takeover</h1>
+        </div>
 
         <Route exact path="/" component={LoginUser} />
         <Route path="/users/new" component={NewUser} />
-        <Route path="/users/clicks" component={UserClicker} />
+        <Route path="/users/AntTakeover" component={AntTakeover} />
         <Route exact path="/users/login" render={this.renderLogin} />
         <Route path="/users/logout" render={this.renderLogOut} />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
