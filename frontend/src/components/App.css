@@ -3,36 +3,7 @@
   user-select: none;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .gameContainer {
-<<<<<<< HEAD:frontend/src/components/App.css
-=======
-  background: url('https://www.wallpaperup.com/uploads/wallpapers/2012/08/23/11607/122aa66ff1f06f5bdf94967c1a5c941d-1400.jpg');
->>>>>>> 7fe182ec73bab28c84cfbf066506d2559ae9f5d6:frontend/src/App.css
   background-size: cover;
   background-repeat: no-repeat;
   display: grid;
@@ -40,7 +11,8 @@
   grid-template-rows: 1fr 4fr;
   grid-template-areas: 
   '. gameHeader userInfo'
-  '. . .';
+  '. p5Game .';
+  background-color: #E1E2E1
 }
 
 .gameHeader {
@@ -51,4 +23,16 @@
   grid-area: userInfo;
   justify-self: end;
   align-self: start;
+}
+
+#p5Game {
+  grid-area: p5Game;
+}
+
+.appHeader > h1 {
+  background-color: #005662;
+  margin: 0;
+  padding: 15px 0px;
+  color: #ffffff;
+  text-shadow: black 2px 2px
 }
