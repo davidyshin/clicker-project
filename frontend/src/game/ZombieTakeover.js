@@ -2,7 +2,7 @@ import React from "react"
 import axios from "axios"
 import { Route, Link, Switch } from "react-router-dom"
 
-class AntTakeover extends React.Component {
+class ZombieTakeover extends React.Component {
   constructor(props) {
     super(props)
 
@@ -42,15 +42,19 @@ class AntTakeover extends React.Component {
   }
   render() {
     const { clicks } = this.state
+    console.log(this.props.username)
     return (
       <div className="gameContainer" onClick={this.handleClick}>
         <div className='gameHeader'>
-          <Link to="/users/logout">Log Out</Link>
-          <h1> Click Counter: {clicks} </h1>
+          <h1> Total Brains: {clicks} </h1>
+        </div>
+        <div className='userInfo'>
+          <p>Hello {this.props.username}!</p>
+        <Link to="/users/logout">Log Out</Link>
         </div>
       </div>
     )
   }
 }
 
-export default AntTakeover
+export default ZombieTakeover

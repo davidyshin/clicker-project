@@ -4,7 +4,7 @@ import axios from "axios"
 import './App.css'
 import NewUser from "./users/NewUser"
 import LoginUser from "./users/LoginUser"
-import AntTakeover from "./game/AntTakeover"
+import ZombieTakeover from "./game/ZombieTakeover"
 import LogOut from "./users/LogOut"
 
 class App extends React.Component {
@@ -37,7 +37,7 @@ class App extends React.Component {
     if (!user) {
       return <LoginUser setUser={this.setUser} />
     }
-    return <AntTakeover id={user.username} />
+    return <ZombieTakeover id={user.username} />
   }
 
   renderLogOut = () => {
@@ -49,12 +49,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <div>
-          <h1>Ant Takeover</h1>
+          <h1>Zombie Takeover</h1>
         </div>
 
         <Route exact path="/" component={LoginUser} />
         <Route path="/users/new" component={NewUser} />
-        <Route path="/users/AntTakeover" component={AntTakeover} />
+        <Route path="/users/ZombieTakeover" component={ZombieTakeover} />
         <Route exact path="/users/login" render={this.renderLogin} />
         <Route path="/users/logout" render={this.renderLogOut} />
       </div>
