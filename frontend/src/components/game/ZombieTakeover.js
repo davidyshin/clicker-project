@@ -46,10 +46,10 @@ class ZombieTakeover extends React.Component {
     const { clicks } = this.state
     const { username } = this.props
     return (
-      <div className="gameContainer" onClick={this.handleClick}>
+      <div className="gameContainer" >
         <BrainCount clicks={clicks} />
         <UserInfo username={username} />
-        <div id="zombieSprite" />
+        <div id="zombieSprite" onClick={this.handleClick}/>
       </div>
     )
   }
