@@ -29,17 +29,23 @@
 }
 
 .gameContainer {
-  background: url('https://ak7.picdn.net/shutterstock/videos/17852947/thumb/1.jpg?i10c=img.resize(height:160)');
+  background: url('https://www.wallpaperup.com/uploads/wallpapers/2012/08/23/11607/122aa66ff1f06f5bdf94967c1a5c941d-1400.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 4fr;
   grid-template-areas: 
-  '. gameHeader .'
+  '. gameHeader userInfo'
   '. . .';
 }
 
 .gameHeader {
   grid-area: gameHeader;
+}
+
+.userInfo {
+  grid-area: userInfo;
+  justify-self: end;
+  align-self: start;
 }
