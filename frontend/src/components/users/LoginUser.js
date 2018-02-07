@@ -59,7 +59,7 @@ class LoginUser extends React.Component {
     const { usernameInput, passwordInput, message, loggedIn } = this.state;
 
     if (loggedIn) {
-      return <Redirect to="/users/AntTakeover" />;
+      return <Redirect to="/users/ZombieTakeover" />;
     }
 
     return (
