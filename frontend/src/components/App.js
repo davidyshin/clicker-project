@@ -4,7 +4,7 @@ import axios from "axios"
 import './App.css'
 import NewUser from "./users/NewUser"
 import LoginUser from "./users/LoginUser"
-import Game from "./game/Game"
+import ZombieTakeover from "./game/ZombieTakeover"
 import LogOut from "./users/LogOut"
 
 class App extends React.Component {
@@ -37,7 +37,7 @@ class App extends React.Component {
     if (!user) {
       return <LoginUser setUser={this.setUser} />
     }
-    return <Game id={user.username} />
+    return <ZombieTakeover id={user.username} />
   }
 
   renderLogOut = () => {
@@ -48,13 +48,14 @@ class App extends React.Component {
     const { user, newUser } = this.state
     return (
       <div className="App">
-        <div>
+        <div className='appHeader'>
           <h1>Zombie Takeover</h1>
         </div>
 
+
         <Route exact path="/" render={this.renderLogin} />
         <Route path="/users/new" component={NewUser} />
-        <Route path="/users/ZombieTakeover" component={Game} />
+        <Route path="/users/ZombieTakeover" component={ZombieTakeover} />
         <Route exact path="/users/login" render={this.renderLogin} />
         <Route path="/users/logout" render={this.renderLogOut} />
       </div>

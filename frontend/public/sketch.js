@@ -10,7 +10,7 @@ function preload() {
 
 function setup() {
   var canvas = createCanvas(350, 350);
-  canvas.parent("p5Game");
+  canvas.parent("zombieSprite");
   zombie = createSprite(width/2, height/2, 50, 50);
   zombie.addAnimation("zombie_idle", zombie_idle);
   console.log("game working");
@@ -19,7 +19,11 @@ function setup() {
 }
 
 function draw() {
+<<<<<<< HEAD
   clear()
+=======
+  background(225, 226, 225)
+>>>>>>> 85dd31575ac607799aa05296f36bf21e8b273eb8
   drawSprites()
 
 }
