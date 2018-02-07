@@ -52,7 +52,8 @@ class App extends React.Component {
           <h1>Zombie Takeover</h1>
         </div>
 
-        <Route exact path="/" component={LoginUser} />
+
+        <Route exact path="/" render={this.renderLogin} />
         <Route path="/users/new" component={NewUser} />
         <Route path="/users/ZombieTakeover" component={ZombieTakeover} />
         <Route exact path="/users/login" render={this.renderLogin} />
