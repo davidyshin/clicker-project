@@ -11,7 +11,7 @@
   grid-template-rows: 1fr 4fr;
   grid-template-areas: 
   '. gameHeader userInfo'
-  '. p5Game .';
+  '. zombieSprite .';
   background-color: #E1E2E1
 }
 
@@ -25,8 +25,12 @@
   align-self: start;
 }
 
-#p5Game {
-  grid-area: p5Game;
+.userInfo p {
+  margin: 0;
+}
+
+#zombieSprite {
+  grid-area: zombieSprite;
 }
 
 .appHeader > h1 {

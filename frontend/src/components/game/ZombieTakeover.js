@@ -1,6 +1,8 @@
 import React from "react"
 import axios from "axios"
 import { Route, Link, Switch } from "react-router-dom"
+import UserInfo from "./UserInfo";
+import BrainCount from "./BrainCount";
 
 class ZombieTakeover extends React.Component {
   constructor(props) {
@@ -45,13 +47,9 @@ class ZombieTakeover extends React.Component {
     const { username } = this.props
     return (
       <div className="gameContainer" onClick={this.handleClick}>
-        <div className="gameHeader">
-          <h1> Brains: {clicks} </h1>
-        </div>
-        <div className="userInfo">
-          <Link to="/users/logout">Log Out</Link>
-        </div>
-        <div id="p5Game" />
+        <BrainCount clicks={clicks} />
+        <UserInfo username={username} />
+        <div id="zombieSprite" />
       </div>
     )
   }
