@@ -6,14 +6,23 @@ import { Route, Link, Switch } from "react-router-dom";
 class UserClicker extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      clicks: 0,
-      initializedMultiplier: false,
-      inc: .01,
-      upgradeMultiplier: ''
-    };
-  }
+        clicks: 0, 
+
+    // part of the addition 
+        costOfAddition: 10 , 
+        usedAddition: false, 
+        increment:1, 
+  
+        
+      // part of the multiplication 
+   
+        costOfMultiplier: 100, 
+        usedMultiplier:false , 
+        multiplier: .02, 
+        multiplyCostBy: 1
+      };
+    }
 
   componentDidMount() {
     axios
@@ -30,8 +39,8 @@ class UserClicker extends React.Component {
   }
 
   handleClick = e => {
-    let { clicks } = this.state;
-    clicks += 1;
+    let { clicks, increment } = this.state;
+    clicks += increment;
     this.setState({
       clicks
     });
@@ -45,77 +54,128 @@ class UserClicker extends React.Component {
       });
   };
 
-  multiply = (e) => {
-    let { clicks } = this.state
-    clicks -= 10
-    if (clicks === 0) {
-      clicks = .05
-    }
+  
+  handleAddition = e=>{
+    let {clicks, increment,  costOfAddition,usedAddition}= this.state
+    if (clicks >= costOfAddition){
+      clicks -=costOfAddition
+    
+      usedAddition= true
+      increment +=1
+    } 
     this.setState({
-      initializedMultiplier: true,
-      clicks
+        increment:increment, 
+        clicks: clicks, 
+        costOfAddition: costOfAddition * increment, 
+        usedAddition:usedAddition
+        
     })
+    this.setState({
+       increment:increment, 
+        clicks: clicks, 
+        costOfAddition: costOfAddition * increment, 
+      usedAddition:false
+    })
+
+  }
+
+    handleMultiplication = e=>{
+    let {clicks, multiplier,  costOfMultiplier, usedMultiplier , multiplyCostBy}= this.state
+    if (clicks >= costOfMultiplier){
+      clicks -=costOfMultiplier
+      usedMultiplier= true
+      multiplier +=.005
+      multiplyCostBy+=.25
+      
+    } 
+    this.setState({
+      multiplier: multiplier,
+      clicks: clicks,
+      costOfMultiplier: costOfMultiplier * multiplyCostBy,
+      usedMultiplier: true
+
+    })
+    
     setInterval(() => {
-      let { clicks, inc } = this.state;
-      clicks += (clicks * inc)
-      console.log(typeof (clicks))
+      let { clicks, multiplier , costOfMultiplier} = this.state;
+      clicks += (clicks * multiplier)
+      console.log(typeof (multiplier))
       console.log(this.state)
       this.setState({
-        clicks
+        clicks, 
+        multiplier,
+        costOfMultiplier
       })
     }, 1000);
-  }
-
-
-  upgradeMultiplier = e => {
-    let { clicks, inc } = this.state;
-    inc += .005
+    
     this.setState({
-      inc
+      multiplier: multiplier,
+      clicks: clicks,
+      costOfMultiplier: costOfMultiplier * multiplyCostBy,
+      usedMultiplier: false
+
     })
-    console.log(inc)
+
   }
 
 
-  render() {
-    const { clicks, initializedMultiplier } = this.state;
+
+  log = () => console.log(this.state)
+      
+render() {
+    const { clicks, costOfAddition, costOfMultiplier, usedAddition, usedMultiplier, } = this.state;
+    console.log(this.state)
     return (
-      <div>
-        <Link to="/users/logout">Log Out</Link>
-        <h1> Click Counter: {clicks} </h1>
-        <p>
+      <div >
+          <button onClick={this.log}>Log</button>
+        <h1> Click Counter: {clicks.toFixed(4)} </h1>
+
+        //here we are adding by the physical click {' '}
+       <p> 
           <button name='physicalClick' onClick={this.handleClick}>
-            {" "}
-            + HERE{" "}
-          </button>
+          {" "}
+          + HERE{" "}
+        </button>
 
-        </p>
 
+      </p>
         //here we are going to do a timer by second and how much we want to do ants by that second
-        // so by clicking this button we are growing the ants by .2 ants per second 
-        // so we are doing this.state += .2
+        
+
+        <p> to initialize addition pay {costOfAddition} clicks  {''}
+        {clicks >=costOfAddition ? 
+            <button name='auto multiple' onClick={this.handleAddition} disabled={usedAddition} > 
+          {" "}
+          +  Double the clicker!{" "}
+            </button> 
+            : <button name='auto multiple' disabled>
+              {" "}
+              +   Double the clicker!{" "}
+            </button>
+        }
+
+        </p> 
 
 
-        <p> to initialize multiplier pay 10 clicks  {''}
-          {clicks >= 10 ?
-            <button name='auto multiple' onClick={this.multiply}> {" "}
-              +  Initialize Multiplier{" "}
-            </button>: 
-            <button name='auto multiple' onClick={this.multiply} disabled>{" "}
-              +  Initialize Multiplier{" "}
-            </button>}
+      <p> to initialize multiplier pay {costOfMultiplier} {''}
+      {clicks >=  costOfMultiplier ? 
+        <button name='auto multiple' onClick={this.handleMultiplication} disabled= {usedMultiplier}>
+          {" "}
+          + Use Multiplier!{" "}
+        </button> : 
+        <button name='auto multiple' onClick={this.handleMultiplication} disabled>
+          {" "}
+          + Use Multiplier!{" "}
+        </button> 
+  }
         </p>
 
-        {clicks >= 50 && initializedMultiplier ?
-          <button name='auto multiple' onClick={this.upgradeMultiplier}>{" "}
-            + UpGradeMultiplier{" "}
-          </button> :
-          <button name='auto multiple' onClick={this.upgradeMultiplier} disabled>{" "}
-            + UpGradeMultiplier{" "}
-          </button>}
+
+       
       </div>
     );
   }
-}
+}  
+  
 
 export default UserClicker;
